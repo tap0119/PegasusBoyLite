@@ -2,7 +2,7 @@
 Pegasus Boy Lite is a theme for [Pegasus Frontend](https://pegasus-frontend.org) based on [Pegaus Boy by gtaforever00](https://github.com/gtaforever00/pegasus-boy).  It features a minimal interface that prioritizes the game list and images with settings to tweak the layout how you like.
 
 ## Installation
-Download the [latest release]([https://github.com/tap0119/PegasusBoyLite/releases/tag](https://github.com/tap0119/PegasusBoyLite/releases/tag/Release)), extract and place in the resulting folder your Pegasus theme directory. In Pegasus, select the theme in the settings menu.
+Download the [latest release](https://github.com/tap0119/PegasusBoyLite/releases/tag/Release), extract and place in the resulting folder your Pegasus theme directory. In Pegasus, select the theme in the settings menu.
 
 ## Assets
 This theme is designed to use the following assets. To get the most out of this theme, it is reccomended you have a Screenshot, and at least one of the titlescreen or boxart for each game. 
