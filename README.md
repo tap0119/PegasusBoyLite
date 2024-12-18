@@ -38,11 +38,11 @@ L2/R2             - Move up or down 10 rows in the Main List
 
 ## Screenshots
 
-![1](./assets/screenshots/1.png)
-![2](./assets/screenshots/2.png)
-![3](./assets/screenshots/3.png)
-![4](./assets/screenshots/4.png)
-![5](./assets/screenshots/5.png)
+![1](./assets/screenshots/1.png =250x)
+![2](./assets/screenshots/2.png =250x)
+![3](./assets/screenshots/3.png =250x)
+![4](./assets/screenshots/4.png =250x)
+![5](./assets/screenshots/5.png =250x)
 
 
 ## License
@@ -51,7 +51,7 @@ Distributed under the GNU General Public License v3.0+. See [COPYING](COPYING) f
 
 ## Acknowledgements
 
--[Pegaus Boy by gtaforever00](https://github.com/gtaforever00/pegasus-boy)
+- [Pegaus Boy by gtaforever00](https://github.com/gtaforever00/pegasus-boy)
 - [Pegasus](https://pegasus-frontend.org/)
 - [Libretro shaders](https://github.com/libretro/slang-shaders)
 - [Libretro assets](https://github.com/libretro/retroarch-assets)
