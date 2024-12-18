@@ -8,7 +8,7 @@ Download the [latest release](https://github.com/tap0119/PegasusBoyLite/releases
 This theme is designed to use the following assets. To get the most out of this theme, it is reccomended you have a Screenshot, and at least one of the titlescreen or boxart for each game. 
 
 - Titlescreen
-- Boxart (boxfront)
+- Boxfront
 - Screenshot
 
 For information on assets see [Assets in the Pegasus Docs](https://pegasus-frontend.org/docs/user-guide/meta-assets/)
