@@ -38,11 +38,11 @@ L2/R2             - Move up or down 10 rows in the Main List
 
 ## Screenshots
 
-![1](./assets/screenshots/1.png =250x)
-![2](./assets/screenshots/2.png =250x)
-![3](./assets/screenshots/3.png =250x)
-![4](./assets/screenshots/4.png =250x)
-![5](./assets/screenshots/5.png =250x)
+![1|300](./assets/screenshots/1.png)
+![2|300](./assets/screenshots/2.png)
+![3|300](./assets/screenshots/3.png)
+![4|300](./assets/screenshots/4.png)
+![5|300](./assets/screenshots/5.png)
 
 
 ## License
