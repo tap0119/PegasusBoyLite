@@ -75,7 +75,7 @@ Item {
                 color: gamesListRect.ListView.isCurrentItem ? themeData.colorTheme[theme].background : themeData.colorTheme[theme].primary
 
 
-                text: model[textName]
+                text: (themeSettings.replacePar) ? model[textName].replace(/\(([^()]+)\)/g,""): model[textName]
                 //text: modelData[textName]
             }
             

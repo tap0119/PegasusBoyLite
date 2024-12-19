@@ -272,7 +272,7 @@ Component.onCompleted: viewcreated = true;
             Text {
 
                 id: t3
-                text: api.device.batteryPercent.toFixed(2) * 100 + "%";
+                text: (api.device.batteryPercent * 100).toFixed(0) + "%";
 
                 anchors.left: parent.left;
                 anchors.bottom:parent.bottom;

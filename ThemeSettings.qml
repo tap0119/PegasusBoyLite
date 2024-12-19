@@ -48,7 +48,8 @@ Item {
 	"footerfontsize",
 	"menusize",
         "primaryAsset",
-	"menuadjust"
+	"menuadjust",
+	"replacePar"
     ]
 
 
@@ -103,6 +104,8 @@ Item {
     property int menusize: 16
     property string primaryAsset: "Title Screen"
     property int menuadjust: 0
+
+    property bool replacePar: false
 
 
 

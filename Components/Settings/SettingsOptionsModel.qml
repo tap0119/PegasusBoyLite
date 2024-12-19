@@ -112,6 +112,14 @@ Item {
                     "type": "bool",
                     "default": "Disable",
                 },
+
+                {
+                    "name": "Remove Text in ()",
+                    "id": "replacePar",
+                    "description": "Remove text in parenthises when showing game names",
+                    "type": "bool",
+                    "default": "Disable",
+                },
                {
                    "name": "Word Wrap",
                    "id": "wordwrap",
