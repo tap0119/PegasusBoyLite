@@ -497,34 +497,6 @@ FocusScope {
 	    color: themeData.colorTheme[theme].background
         }
 
-
-        Loader {
-            id: gamesMediaLoader
-            sourceComponent: gamesMedia
-            asynchronous: true
-            visible: gamesListLoader.item.model.count > 0
-            active: gamesListLoader.status == Loader.Ready
-            
-            anchors.top: collectionsMenuLoader.bottom
-            anchors.topMargin: parent.height * 0.02
-            anchors.right: parent.right
-            anchors.left: gamesListLoader.right
-            anchors.leftMargin: parent.width * 0.02
-            anchors.bottom: parent.bottom
-        }
-	    
-        Component {
-            id: gamesMedia
-            GamesMedia01 {
-          	currentGame: gamesListLoader.item.model.get(gamesListLoader.item.currentIndex); 
-		imagetype: imagetype2;
-                imagebigview: imagebigview2;
-        }
-        }
-
-
-
-	
 	//collections scroll bar
         Rectangle {
 
@@ -553,6 +525,34 @@ FocusScope {
             }
             
         }
+
+
+        Loader {
+            id: gamesMediaLoader
+            sourceComponent: gamesMedia
+            asynchronous: true
+            visible: gamesListLoader.item.model.count > 0
+            active: gamesListLoader.status == Loader.Ready
+            
+            anchors.top: collectionsMenuLoader.bottom
+            anchors.topMargin: parent.height * 0.02
+            anchors.right: parent.right
+            anchors.left: gamesListLoader.right
+            anchors.leftMargin: parent.width * 0.02
+            anchors.bottom: parent.bottom
+        }
+	    
+        Component {
+            id: gamesMedia
+            GamesMedia01 {
+          	currentGame: gamesListLoader.item.model.get(gamesListLoader.item.currentIndex); 
+		imagetype: imagetype2;
+                imagebigview: imagebigview2;
+        	}
+        }
+
+
+
 
         Component.onCompleted: {
             Logger.info("GamesListMenu:collectionsMenuRoot:onComplete")

@@ -21,7 +21,7 @@ Item {
         width: (imagebigview) ? parent.width/1.05: root.width / 2.1;
         height: (imagebigview) ? (parent.height +marginoffset)/2: root.height;
         x:(imagebigview) ? 0: parent.width - ((root.width*.98) * .5);
-        y:(imagebigview) ? parent.height/2 + 5 + (marginoffset/2) : -70;
+        y:(imagebigview) ? parent.height/2 + 5 + (marginoffset/2) : -(root.height - marginoffset - parent.height - 10);
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
@@ -39,7 +39,7 @@ Item {
         width: (imagebigview) ? parent.width/1.05: root.width / 2.1;
         height: (imagebigview) ? (parent.height +marginoffset)/2: root.height;
         x:(imagebigview) ? 0: parent.width - (root.width * .98);
-        y:(imagebigview) ? 0: -70;
+        y:(imagebigview) ? 0: -(root.height - marginoffset - parent.height - 10);
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
@@ -54,7 +54,6 @@ Item {
 
     Text {
         text: (themeSettings.replacePar) ? currentGame.title.replace(/\(([^()]+)\)/g,""): currentGame.title
-
 	color: themeData.colorTheme[theme].primary;
         opacity: (imagebigview) ? 0 : 1;
 	width: root.width / 2.1
