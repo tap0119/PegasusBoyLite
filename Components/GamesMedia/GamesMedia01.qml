@@ -53,7 +53,8 @@ Item {
 
 
     Text {
-        text: currentGame.title;
+        text: (themeSettings.replacePar) ? currentGame.title.replace(/\(([^()]+)\)/g,""): currentGame.title
+
 	color: themeData.colorTheme[theme].primary;
         opacity: (imagebigview) ? 0 : 1;
 	width: root.width / 2.1
