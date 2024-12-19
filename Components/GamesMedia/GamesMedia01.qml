@@ -25,10 +25,10 @@ Item {
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
-        sourceSize {
-            width: width
-            height: height
-        }
+        //sourceSize {
+        //    width: width
+        //    height: height
+        //}
 
         source: currentGame.assets.screenshot || ""
     }
@@ -43,10 +43,10 @@ Item {
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
-        sourceSize {
-            width: width
-            height: height
-        }
+        //sourceSize {
+        //    width: width
+        //    height: height
+        //}
        		 source: (imagetype) ? primary || secondary: secondary|| ""
     }
 
