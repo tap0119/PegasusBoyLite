@@ -371,11 +371,11 @@ FocusScope {
                 ]
                 sorters: [
                     RoleSorter {
-                        enabled: !collectionsMenuRoot.filterByDate
+                        enabled: (!collectionsMenuRoot.filterByDate && !recentFilter)
                         roleName: "sortBy"
                     },
                     FilterSorter {
-                        enabled: themeSettings.gamesFavoritesOnTop
+                        enabled: themeSettings.gamesFavoritesOnTop && (!collectionsMenuRoot.filterByDate && !recentFilter)
                         priority: 1000
                         filters: [
                             ValueFilter {
@@ -385,7 +385,7 @@ FocusScope {
                         ]
                     },
                     RoleSorter {
-                        enabled: collectionsMenuRoot.filterByDate
+                        enabled: (collectionsMenuRoot.filterByDate || recentFilter)
                         roleName: "lastPlayedEpoch"
                         sortOrder: Qt.DescendingOrder
                     }

@@ -134,16 +134,16 @@ Item {
             "name": "Layout",
             "settings": [
 
-                //{
-		    //"name": "Main Menu - Font Size",
-            //        "id": "menusize",
-            //        "description": "The font size for the Main Menu (reloads Menu on leaving Settings if changed)",
-            //        "type": "range",
-            //        "default": "16",
-            //        "min": 10,
-            //        "max": 25,
-            //        "step": 1,
-            //    },
+                {
+		    "name": "Sub-Menu Font Size",
+                    "id": "menusize",
+                    "description": "The font size for the Sub-Menu",
+                    "type": "range",
+                    "default": "16",
+                    "min": 10,
+                    "max": 25,
+                    "step": 1,
+                },
 
                 {
 		    "name": "Height Adjust",
@@ -216,16 +216,16 @@ Item {
                     "max": 5,
                     "step": 1,
                 },
-                {
-                    "name": "Sub-Menu - Empty Height",
-                    "id": "subMenuEmptyHeight",
-                    "description": "The margin between the Main List and Menu when there is no Sub-Menu",
-                    "type": "range",
-                    "default": "6",
-                    "min": 0,
-                    "max": 12,
-                    "step": 1,
-                },
+                //{
+                //    "name": "Sub-Menu - Empty Height",
+                //    "id": "subMenuEmptyHeight",
+                //    "description": "The margin between the Main List and Menu when there is no Sub-Menu",
+                //    "type": "range",
+                //    "default": "6",
+                //    "min": 0,
+                //    "max": 12,
+                //    "step": 1,
+                //},
 
             ]
         },

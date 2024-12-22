@@ -182,10 +182,10 @@ Item {
 
             Component.onDestruction:{
                 //themeSettings.collectionAllGames != showall
-                if(themeSettings.menusize != size){
-                    menuLoader.active = !menuLoader.active
-                    menuLoader.active = !menuLoader.active
-                }
+                //if(themeSettings.menusize != size){
+                //    menuLoader.active = !menuLoader.active
+                //    menuLoader.active = !menuLoader.active
+                //}
             }
         }
         
