@@ -227,7 +227,7 @@ Component.onCompleted: viewcreated = true;
                 hour: "numeric",
                 minute: "numeric",
             }
-            timeText.text = date.toLocaleTimeString('en-US')
+            t.text = date.toLocaleTimeString('en-US')
         }
     }
 
