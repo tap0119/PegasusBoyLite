@@ -78,7 +78,7 @@ Item {
                 {
                     "name": "Last Played Range",
                     "id": "lastPlayedDays",
-                    "description": "The how many days to show games on the last played menu, select 0 to disable (may require restart)",
+                    "description": "How many days to show games on the recent list. Select 0 to disable (may require restart)",
                     "type": "list",
                     "default": "30",
                     "options": [
