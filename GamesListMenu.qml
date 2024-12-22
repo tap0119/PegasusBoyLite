@@ -26,11 +26,14 @@ FocusScope {
 
     property bool imagetype2:true
     property bool imagebigview2:true
+
+    property bool pagecreated: false
     property bool viewcreated:false
 
     property bool favFilter: false
     property bool recentFilter: false
-    property bool pagecreated: false
+    property bool setplace: true
+    
 
 	SoundEffect {
 		id: navSound;
@@ -94,7 +97,7 @@ FocusScope {
                     pagecreated = true
                     collectionsMenuLoader.item.listView.decrementCurrentIndex();
 
-                    if(gamesListLoader.item.currentIndex > 0){
+                    if(gamesListLoader.item.currentIndex > 0 && setplace){
                         place = gamesListLoader.item.currentIndex
                     }
 
@@ -111,7 +114,7 @@ FocusScope {
                     if(currentCollection.name != "Recent"){
                         recentFilter = false
                     }
-                    
+
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
@@ -119,6 +122,13 @@ FocusScope {
                     gamesListLoader.active = true
 
                     gamesListLoader.item.currentIndex = place;
+
+                    if(place > gamesListModelLoader.item.count -1) {
+                        gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
+
+                        setplace = false
+                    }
+
                     viewcreated = true
                     
                     
@@ -141,7 +151,7 @@ FocusScope {
 
                     collectionsMenuLoader.item.listView.incrementCurrentIndex();
                         
-                    if(gamesListLoader.item.currentIndex > 0){
+                    if(gamesListLoader.item.currentIndex > 0 && setplace){
                         place = gamesListLoader.item.currentIndex
                     }
 
@@ -166,6 +176,11 @@ FocusScope {
                     gamesListLoader.active = true
 
                     gamesListLoader.item.currentIndex = place;
+                    if(place > gamesListModelLoader.item.count -1) {
+                        gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
+
+                        setplace = false
+                    }
 
                     viewcreated = true
 
@@ -438,7 +453,10 @@ FocusScope {
 
                onCurrentIndexChanged:{Logger.info("gamesListView:modelEpoch:" + model.get(currentIndex).lastPlayedEpoch)
 		
-		if(viewcreated && themeSettings.soundslist){navSound2.play()}
+	        if(viewcreated && themeSettings.soundslist){
+                navSound2.play()
+                setplace = true
+            }
  		}
 
 
