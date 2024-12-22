@@ -572,7 +572,36 @@ FocusScope {
             }  
         }
 
-                Rectangle {
+        	//collections scroll bar
+        Rectangle {
+
+            width: 8
+            height: (subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : 0
+
+            anchors {
+            top: parent.top
+            left: parent.left
+            leftMargin: parent.width * 0.02
+            }
+
+
+            opacity: 1
+            color: themeData.colorTheme[theme].background
+
+            Rectangle {
+
+                width: 8
+                height: parent.height * .3
+
+                y: ((parent.height - (parent.height * .3)) * ((collectionsMenuLoader.item.currentIndex + 1) /  (collectionsMenuLoader.item.listView.count)));
+
+                opacity: (themeSettings.collectionscroll && collectionsMenuLoader.item.listView.count - 1 >= themeSettings.subMenuColumns) ? 1: 0;
+                color: themeData.colorTheme[theme].light
+            }
+            
+        }
+
+        Rectangle {
             width: parent.width + 1000
             height: 2
             x: -100
@@ -602,34 +631,7 @@ FocusScope {
 	    color: themeData.colorTheme[theme].background
         }
 
-	//collections scroll bar
-        Rectangle {
 
-            width: 8
-            height: (subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : 0
-
-            anchors {
-            top: parent.top
-            left: parent.left
-            leftMargin: parent.width * 0.02
-            }
-
-
-            opacity: 1
-            color: themeData.colorTheme[theme].background
-
-            Rectangle {
-
-                width: 8
-                height: parent.height * .3
-
-                y: ((parent.height - (parent.height * .3)) * ((collectionsMenuLoader.item.currentIndex + 1) /  (collectionsMenuLoader.item.listView.count)));
-
-                opacity: (themeSettings.collectionscroll && collectionsMenuLoader.item.listView.count - 1 >= themeSettings.subMenuColumns) ? 1: 0;
-                color: themeData.colorTheme[theme].light
-            }
-            
-        }
 
 
         Loader {
