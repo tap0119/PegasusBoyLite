@@ -29,6 +29,7 @@ FocusScope {
     property bool viewcreated:false
 
     property bool favFilter: false
+    property bool pagecreated: false
 
 	SoundEffect {
 		id: navSound;
@@ -86,37 +87,36 @@ FocusScope {
             }
 
             if (event.key == Qt.Key_Left && subMenuEnable) {
-		event.accepted = true;
+		        event.accepted = true;
                 if (collectionsMenuLoader.item.listView.currentIndex - 1 >= 0) {
-		    viewcreated = false
+		            viewcreated = false
+                    pagecreated = true
                     collectionsMenuLoader.item.listView.decrementCurrentIndex();
 
-            if(favFilter == false){
-       		    if(gamesListLoader.item.currentIndex > 0){
-	     	    	place = gamesListLoader.item.currentIndex
-	 	        }
-                    gamesListLoader.item.currentIndex = place;
-            }
-            if(favFilter){
-                if(gamesListLoader.item.currentIndex > 0){
-	     	    	place = gamesListLoader.item.currentIndex
-	 	        }
+                    if(gamesListLoader.item.currentIndex > 0){
+                        place = gamesListLoader.item.currentIndex
+                    }
 
-                gamesListLoader.item.currentIndex = 1
-            }
+                    if(currentCollection.name == "Favorites"){
+                        favFilter = true
+                    }
+                    if(currentCollection.name != "Favorites"){
+                        favFilter = false
+                    }
+                    //if(favFilter == false){
+                        gamesListLoader.item.currentIndex = place;
+                    //}
+                    //if(favFilter){
+                    //    gamesListLoader.item.currentIndex = 1
+                    //}
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
-                     gamesListLoader.active = false
-
-                if(currentCollection.name == "Favorites"){
-                    favFilter = true
-                }
-                if(currentCollection.name != "Favorites"){
-                    favFilter = false
-                }
-                   
+                    gamesListLoader.active = false
                     gamesListLoader.active = true
+                    viewcreated = true
+                    
+                    
                     Logger.debug("GamesListMenu:keys:left:currentSubMenu:" + currentCollection.name)
                     if(themeSettings.soundsmenu){
                         navSound.play();
@@ -131,28 +131,36 @@ FocusScope {
             if (event.key == Qt.Key_Right && subMenuEnable) {
                 event.accepted = true;
                 if (collectionsMenuLoader.item.listView.currentIndex + 1 < collectionsMenuLoader.item.listView.count) {
-		    viewcreated = false
-                    collectionsMenuLoader.item.listView.incrementCurrentIndex();
+                    viewcreated = false
+                    pagecreated = true
                     
-            if(gamesListLoader.item.currentIndex > 0){
-	 	   	    place = gamesListLoader.item.currentIndex
-            }
+                    collectionsMenuLoader.item.listView.incrementCurrentIndex();
+                        
+                    if(gamesListLoader.item.currentIndex > 0){
+                        place = gamesListLoader.item.currentIndex
+                    }
 
-            gamesListLoader.item.currentIndex = place;
- 
+                    if(currentCollection.name == "Favorites"){
+                        favFilter = true
+                    }
+                    if(currentCollection.name != "Favorites"){
+                        favFilter = false
+                    }
+                    //if(favFilter == false){
+                        gamesListLoader.item.currentIndex = place;
+                    //}
+                    //if(favFilter){
+                    //    gamesListLoader.item.currentIndex = 1
+                    //}
+    
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
-                     gamesListLoader.active = false
-
-                if(currentCollection.name == "Favorites"){
-                    favFilter = true
-                }
-                if(currentCollection.name != "Favorites"){
-                    favFilter = false
-                }
-                   
+                    gamesListLoader.active = false
                     gamesListLoader.active = true
+
+                    viewcreated = true
+
                     Logger.debug("GamesListMenu:keys:right:currentSubMenu:" + currentCollection.name)
                     if(themeSettings.soundsmenu){
                         navSound.play();
@@ -166,7 +174,7 @@ FocusScope {
             if (api.keys.isDetails(event)) {
                 event.accepted = true;
 		if(imagetype2){
-                	imagetype2 = false;
+                	imagetype2 = false;  
 		}else{
                 	imagetype2 = true;
 		}
@@ -234,12 +242,6 @@ FocusScope {
             anchors.leftMargin: parent.width * 0.02
 
             onStatusChanged: {
-                if(currentCollection.name == "Favorites"){
-                    favFilter = true
-                }
-                if(currentCollection.name != "Favorites"){
-                    favFilter = false
-                }
                 if (collectionsMenuLoader.status == Loader.Ready) {
                     Logger.info("GamesListMenu:collectionsMenuLoader:LoaderReady")
 
@@ -250,7 +252,12 @@ FocusScope {
                         index = themeSettings["menuIndex_subMenu"]
                     }
                     item.moveIndex(index)
-
+                    if(currentCollection.name == "Favorites"){
+                        favFilter = true
+                    }
+                    if(currentCollection.name != "Favorites"){
+                        favFilter = false
+                    }
                     
                     gamesListModelLoader.active = true
                 }
@@ -407,8 +414,10 @@ FocusScope {
                     Logger.info("GameListMenu:gameListView:onCompleted:savedIndex:" + index);
                     moveIndex(index);
 
-                    viewcreated = true
-
+                    
+                    if(!pagecreated){
+                        viewcreated = true
+                    }
 			
                 }
 
