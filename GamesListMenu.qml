@@ -28,6 +28,8 @@ FocusScope {
     property bool imagebigview2:true
     property bool viewcreated:false
 
+    property bool favFilter: false
+
 	SoundEffect {
 		id: navSound;
 		source: 'assets/sound/click.wav';
@@ -69,7 +71,7 @@ FocusScope {
 
         property var currentCollection: {
             return subMenuModel.get(collectionsMenuLoader.item.currentIndex)
-//return subMenuModel.get(subMenuModel.mapToSource(collectionsMenuLoader.item.currentIndex))
+//return subMenuModel.get(subMenuModel.mapToSource(collectionsMenuLoader.item.currentIndex));
         }
 
         property var currentGame: { 
@@ -89,20 +91,39 @@ FocusScope {
 		    viewcreated = false
                     collectionsMenuLoader.item.listView.decrementCurrentIndex();
 
-		    if(gamesListLoader.item.currentIndex > 0){
-	 	    	place = gamesListLoader.item.currentIndex
-	 	    }
+            if(favFilter == false){
+       		    if(gamesListLoader.item.currentIndex > 0){
+	     	    	place = gamesListLoader.item.currentIndex
+	 	        }
                     gamesListLoader.item.currentIndex = place;
+            }
+            if(favFilter){
+                if(gamesListLoader.item.currentIndex > 0){
+	     	    	place = gamesListLoader.item.currentIndex
+	 	        }
+
+                gamesListLoader.item.currentIndex = 1
+            }
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
-                    gamesListLoader.active = false
+                     gamesListLoader.active = false
+
+                if(currentCollection.name == "Favorites"){
+                    favFilter = true
+                }
+                if(currentCollection.name != "Favorites"){
+                    favFilter = false
+                }
+                   
                     gamesListLoader.active = true
                     Logger.debug("GamesListMenu:keys:left:currentSubMenu:" + currentCollection.name)
                     if(themeSettings.soundsmenu){
                         navSound.play();
                     }
                 }	
+
+
 		
                 return;
             }
@@ -113,14 +134,24 @@ FocusScope {
 		    viewcreated = false
                     collectionsMenuLoader.item.listView.incrementCurrentIndex();
                     
-		    if(gamesListLoader.item.currentIndex > 0){
-	 	   	 place = gamesListLoader.item.currentIndex
-		    }
-                    gamesListLoader.item.currentIndex = place;
+            if(gamesListLoader.item.currentIndex > 0){
+	 	   	    place = gamesListLoader.item.currentIndex
+            }
+
+            gamesListLoader.item.currentIndex = place;
+ 
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
-                    gamesListLoader.active = false
+                     gamesListLoader.active = false
+
+                if(currentCollection.name == "Favorites"){
+                    favFilter = true
+                }
+                if(currentCollection.name != "Favorites"){
+                    favFilter = false
+                }
+                   
                     gamesListLoader.active = true
                     Logger.debug("GamesListMenu:keys:right:currentSubMenu:" + currentCollection.name)
                     if(themeSettings.soundsmenu){
@@ -203,6 +234,12 @@ FocusScope {
             anchors.leftMargin: parent.width * 0.02
 
             onStatusChanged: {
+                if(currentCollection.name == "Favorites"){
+                    favFilter = true
+                }
+                if(currentCollection.name != "Favorites"){
+                    favFilter = false
+                }
                 if (collectionsMenuLoader.status == Loader.Ready) {
                     Logger.info("GamesListMenu:collectionsMenuLoader:LoaderReady")
 
@@ -242,6 +279,8 @@ FocusScope {
                     Logger.info("GamesListMenu:collectionsMenuListView:onCompleted")
                 }
                 
+                
+                
             }
         }
 
@@ -255,8 +294,10 @@ FocusScope {
                     Logger.info("GamesListMenu:gamesListModelLoader:LoaderReady")
                     gamesListLoader.active = true
                 }
+
             }
         }
+
 
         Component {
             id: gamesListProxyModel
@@ -266,7 +307,7 @@ FocusScope {
                 delayed: false
                 filters: [
                     ValueFilter {
-                        enabled: collectionsMenuRoot.filterOnlyFavorites
+                        enabled: (collectionsMenuRoot.filterOnlyFavorites || favFilter)
                         roleName: "favorite"
                         value: true
                     },
@@ -365,7 +406,10 @@ FocusScope {
                     }
                     Logger.info("GameListMenu:gameListView:onCompleted:savedIndex:" + index);
                     moveIndex(index);
-			viewcreated = true
+
+                    viewcreated = true
+
+			
                 }
 
                onCurrentIndexChanged:{Logger.info("gamesListView:modelEpoch:" + model.get(currentIndex).lastPlayedEpoch)

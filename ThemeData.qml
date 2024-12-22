@@ -8,6 +8,8 @@ Item {
     // Add an All to the main collections model
     // Dynamically create a ListModel to keep compatability
     property alias collectionsListModel: collectionsListModel
+
+    
     ListModel {
         id: collectionsListModel 
 
@@ -18,6 +20,14 @@ Item {
                 shortName: "all",
                 games: api.allGames
             }
+
+            const favCollection = {
+                name: "Favorites",
+                shortName: "Fav",
+                games: api.allGames
+            }
+
+            collectionsListModel.append(favCollection)
 		
             if (themeSettings.collectionAllGames) {
                 collectionsListModel.append(allCollection)

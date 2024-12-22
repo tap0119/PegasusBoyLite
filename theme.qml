@@ -15,8 +15,8 @@ FocusScope {
 
     property var menuOptions: [
         { name: "collections", title: "Games"},
-        { name: "favorites", title: "Favorites"},
-        { name: "lastplayed", title: "Recent"},
+        //{ name: "favorites", title: "Favorites"},
+        //{ name: "lastplayed", title: "Recent"},
         { name: "settings", title: "Settings"}
     ]
 

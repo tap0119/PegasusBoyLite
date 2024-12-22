@@ -17,7 +17,7 @@ Item {
     Keys.onPressed: {
         if (api.keys.isNextPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex < 3 && themeSettings.soundsmenu){
+            if(menuLoader.item.currentIndex < 1 && themeSettings.soundsmenu){
 	    	forSound.play();
 	    }
             menuItem.menuListView.incrementCurrentIndex()
@@ -48,7 +48,8 @@ Item {
         id: menuLoader
         focus: false
         width: parent.width
-        height: parent.height * 0.1
+        height: 0
+        //height: parent.height * 0.1
         sourceComponent: menuComponent
 	y: themeSettings.menuadjust      
 	asynchronous: true
@@ -214,29 +215,29 @@ Item {
                 }
             ]
         },
-        State {
-            name: "favorites"
-            when: menuItem.currentIndex == 1
-            changes: [
-                PropertyChanges {
-                    target: contentLoader
-                    sourceComponent: favoritesMenu
-                }
-            ]
-        },
-        State {
-            name: "lastplayed"
-            when: menuItem.currentIndex == 2
-            changes: [
-                PropertyChanges {
-                    target: contentLoader
-                    sourceComponent: lastPlayedMenu
-                }
-            ]
-        },
+        //State {
+        //    name: "favorites"
+        //    when: menuItem.currentIndex == 1
+        //    changes: [
+        //        PropertyChanges {
+        //            target: contentLoader
+        //            sourceComponent: favoritesMenu
+        //        }
+        //    ]
+        //},
+        //State {
+        //    name: "lastplayed"
+        //    when: menuItem.currentIndex == 2
+        //    changes: [
+        //        PropertyChanges {
+        //            target: contentLoader
+        //            sourceComponent: lastPlayedMenu
+        //        }
+        //    ]
+        //},
         State {
             name: "settings"
-            when: menuItem.currentIndex == 3
+            when: menuItem.currentIndex == 1
             PropertyChanges {
                 target: contentLoader
                 sourceComponent: settingsMenu
