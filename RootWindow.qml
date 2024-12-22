@@ -9,8 +9,8 @@ Item {
 
 	SoundEffect {
 		id: forSound;
-		source: 'assets/sound/forward.wav';
-		volume: .25;
+		source: 'assets/sound/click.wav';
+		volume: .15;
 	}
 
 
@@ -18,8 +18,8 @@ Item {
         if (api.keys.isNextPage(event)) {
             event.accepted = true
             if(menuLoader.item.currentIndex < 1 && themeSettings.soundsmenu){
-	    	forSound.play();
-	    }
+	    	    forSound.play();
+	        }
             menuItem.menuListView.incrementCurrentIndex()
             Logger.info("Menu Index: " + menuLoader.item.currentIndex)
             return
@@ -28,8 +28,8 @@ Item {
         if (api.keys.isPrevPage(event)) {
             event.accepted = true
             if(menuLoader.item.currentIndex > 0 && (themeSettings.soundsmenu)){
-	     	forSound.play();
-	    }
+	     	    forSound.play();
+	        }
             menuItem.menuListView.decrementCurrentIndex()
             Logger.info("Menu Index: " + menuLoader.item.currentIndex)
 	    return

@@ -29,6 +29,7 @@ FocusScope {
     property bool viewcreated:false
 
     property bool favFilter: false
+    property bool recentFilter: false
     property bool pagecreated: false
 
 	SoundEffect {
@@ -63,7 +64,7 @@ FocusScope {
         required property bool subMenuEnable
         property var subMenuModel: []
         property int subMenuIndex: 0
-	property int place: 0
+	    property int place: 0
 
         required property var gamesListModel
 
@@ -103,17 +104,21 @@ FocusScope {
                     if(currentCollection.name != "Favorites"){
                         favFilter = false
                     }
-                    //if(favFilter == false){
-                        gamesListLoader.item.currentIndex = place;
-                    //}
-                    //if(favFilter){
-                    //    gamesListLoader.item.currentIndex = 1
-                    //}
+
+                    if(currentCollection.name == "Recent"){
+                        recentFilter = true
+                    }
+                    if(currentCollection.name != "Recent"){
+                        recentFilter = false
+                    }
+                    
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
                     gamesListLoader.active = false
                     gamesListLoader.active = true
+
+                    gamesListLoader.item.currentIndex = place;
                     viewcreated = true
                     
                     
@@ -133,7 +138,7 @@ FocusScope {
                 if (collectionsMenuLoader.item.listView.currentIndex + 1 < collectionsMenuLoader.item.listView.count) {
                     viewcreated = false
                     pagecreated = true
-                    
+
                     collectionsMenuLoader.item.listView.incrementCurrentIndex();
                         
                     if(gamesListLoader.item.currentIndex > 0){
@@ -146,18 +151,21 @@ FocusScope {
                     if(currentCollection.name != "Favorites"){
                         favFilter = false
                     }
-                    //if(favFilter == false){
-                        gamesListLoader.item.currentIndex = place;
-                    //}
-                    //if(favFilter){
-                    //    gamesListLoader.item.currentIndex = 1
-                    //}
+
+                    if(currentCollection.name == "Recent"){
+                        recentFilter = true
+                    }
+                    if(currentCollection.name != "Recent"){
+                        recentFilter = false
+                    }
     
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
                     gamesListLoader.active = false
                     gamesListLoader.active = true
+
+                    gamesListLoader.item.currentIndex = place;
 
                     viewcreated = true
 
@@ -258,6 +266,13 @@ FocusScope {
                     if(currentCollection.name != "Favorites"){
                         favFilter = false
                     }
+
+                    if(currentCollection.name == "Recent"){
+                        recentFilter = true
+                    }
+                    if(currentCollection.name != "Recent"){
+                        recentFilter = false
+                    }
                     
                     gamesListModelLoader.active = true
                 }
@@ -319,12 +334,12 @@ FocusScope {
                         value: true
                     },
                     RangeFilter {
-                        enabled: collectionsMenuRoot.filterByDate
+                        enabled: (collectionsMenuRoot.filterByDate || recentFilter)
                         roleName: "playCount"
                         minimumValue: 1
                     },
                     ExpressionFilter {
-                        enabled: collectionsMenuRoot.filterByDate 
+                        enabled: (collectionsMenuRoot.filterByDate || recentFilter) 
                         expression: {
                             var dateOffset = (24 * 60 * 60 * 1000) * themeSettings.lastPlayedDays;
                             var myDate = new Date();

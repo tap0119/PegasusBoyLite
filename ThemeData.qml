@@ -17,18 +17,28 @@ Item {
             const collections = api.collections
             const allCollection = {
                 name: "All",
-                shortName: "all",
+                shortName: "All",
                 games: api.allGames
             }
 
             const favCollection = {
                 name: "Favorites",
-                shortName: "Fav",
+                shortName: "♥︎ Fav",
+                games: api.allGames
+            }
+
+            const recentCollection = {
+                name: "Recent",
+                shortName: "Recent",
                 games: api.allGames
             }
 
             collectionsListModel.append(favCollection)
-		
+
+            if(themeSettings.lastPlayedDays > 0) {
+                collectionsListModel.append(recentCollection)
+            }
+
             if (themeSettings.collectionAllGames) {
                 collectionsListModel.append(allCollection)
             }
