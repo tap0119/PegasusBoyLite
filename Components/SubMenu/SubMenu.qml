@@ -49,6 +49,8 @@ FocusScope {
            //}
             subMenuListView.columns = (settingsview) ? 4 : col
 
+            resizeFont()
+
             Logger.debug("SubMenu:columnsChanged:" + columns);
 
         }
@@ -101,6 +103,8 @@ FocusScope {
         onWidthChanged: resizeFont()
         onCountChanged: resizeFont()
 
+
+
         Component.onCompleted: {
             // fontSize = utils.calculateFontSizeModel(subMenuListFont.font, 
             //     (subMenuListView.width / subMenuListView.columns) * 0.8,
@@ -120,8 +124,11 @@ FocusScope {
 
         onCurrentIndexChanged: {
             Logger.info("SubMenu:subMenuListView:currentIndexChanged:" + currentIndex)
+
+
         }
     }
+
 
     SubMenuDelegate {
         id: subMenuDelegate

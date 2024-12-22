@@ -23,7 +23,7 @@ Item {
 
             const favCollection = {
                 name: "Favorites",
-                shortName: "♥︎ Fav",
+                shortName: "♥ Fav",
                 games: api.allGames
             }
 
