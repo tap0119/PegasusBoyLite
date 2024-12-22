@@ -490,6 +490,7 @@ FocusScope {
     }
 
 
+
 //Clock
         Rectangle {
             width: t.width + 2.5
@@ -635,6 +636,24 @@ FocusScope {
 		imagetype: imagetype2;
                 imagebigview: imagebigview2;
         	}
+        }
+
+        Rectangle {
+            width: parent.width + 1000
+            height: 2
+            x: -100
+            y: parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) - 2
+            color: themeData.colorTheme[theme].light
+        }
+
+        Rectangle {
+            width: (parent.width * (themeSettings.itemListWidth / 100)) + 13
+            height: 2
+            x: 0
+            y: parent.height
+            color: themeData.colorTheme[theme].light
+
+            opacity: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? 1 : 0
         }
 
 
