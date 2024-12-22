@@ -112,8 +112,10 @@ FocusScope {
             resizeFont()
             // The position for the middle elements caused it to be at the beginning
             // This is a workaround to fix the view
+
             if (currentIndex > 0) { positionViewAtIndex(currentIndex - 1, ListView.SnapPosition) }
             else { positionViewAtIndex(currentIndex, ListView.SnapPosition) }
+
         }
 
         onCurrentIndexChanged: {

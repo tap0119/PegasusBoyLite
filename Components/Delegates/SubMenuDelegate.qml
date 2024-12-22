@@ -46,7 +46,7 @@ opacity: {
 
                 anchors {
                     // bottom: parent.bottom
-                    // horizontalCenter: parent.horizontalCenter
+                    //horizontalCenter: parent.horizontalCenter
                     centerIn: parent
                 }
 
