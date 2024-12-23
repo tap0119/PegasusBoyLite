@@ -611,12 +611,12 @@ FocusScope {
 
         Rectangle {
             width: (parent.width * (themeSettings.itemListWidth / 100)) + 13
-            height: 2
+           height: 2
             x: 0
             y: parent.height
             color: themeData.colorTheme[theme].light
-
-            opacity: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? 1 : 0
+            opacity: 0
+        //    opacity: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? 1 : 0
         }
 
 

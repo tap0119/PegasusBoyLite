@@ -70,7 +70,7 @@ FocusScope {
             property bool settingsOptionsActive: false
 
             Keys.onPressed: {
-                if (event.key == Qt.Key_Left) {
+                if (event.key == Qt.Key_Left &&  !settingsOptionsActive) {
                     event.accepted = true;
 			viewcreated = false;
 			if(collectionsMenuListView.listView.currentIndex > 0 && themeSettings.soundsmenu){
@@ -81,7 +81,7 @@ FocusScope {
                     return;
                 }
                 
-                if (event.key == Qt.Key_Right) {
+                if (event.key == Qt.Key_Right && !settingsOptionsActive) {
                     event.accepted = true;
 			viewcreated = false;
 			if(collectionsMenuListView.listView.currentIndex < 3 && themeSettings.soundsmenu){
@@ -107,6 +107,7 @@ FocusScope {
 
                 if (api.keys.isCancel(event)) {
                     event.accepted = true;
+                    settingsOptionsActive = false;
                     settingsListView.forceActiveFocus();
                     return;
                 }
@@ -300,7 +301,8 @@ Component.onCompleted: viewcreated = true;
             y: parent.height
             color: themeData.colorTheme[theme].light
 
-            opacity: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? 1 : 0
+            opacity: 0
+            //opacity: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? 1 : 0
         }
 
             SettingsOptions {
