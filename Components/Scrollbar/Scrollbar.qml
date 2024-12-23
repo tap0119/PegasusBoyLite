@@ -19,7 +19,7 @@ Item {
         }
 
 
-        color: themeData.colorTheme[theme].primary
+        color: themeData.colorTheme[theme].light
 
         // adding .01 to the height fixes a bug where the scrollbar would show
         // if the games matched the rows equally

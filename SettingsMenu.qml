@@ -204,7 +204,7 @@ FocusScope {
 
                     font.family: "HackRegular"
                     font.pixelSize: parent.height * .08
-                    color: themeData.colorTheme[theme].primary
+                    color: themeData.colorTheme[theme].light
 
                     text: {
                         return "Default: " +
@@ -254,7 +254,7 @@ Component.onCompleted: viewcreated = true;
                 opacity: (themeSettings.showClock) ? 1 : 0
                 font.family: "HackRegular"
                 font.pointSize: themeSettings.footerfontsize
-                color: themeData.colorTheme[theme].primary;
+                color: themeData.colorTheme[theme].light;
             }  
         }
 
