@@ -17,21 +17,20 @@ Item {
     Keys.onPressed: {
         if (api.keys.isNextPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex < 1 && themeSettings.soundsmenu){
-	    	    forSound.play();
+            if(menuLoader.item.currentIndex == 0 && (themeSettings.soundsmenu)){
+     	    forSound.play();
 	        }
-            menuItem.menuListView.incrementCurrentIndex()
-            Logger.info("Menu Index: " + menuLoader.item.currentIndex)
+                menuItem.menuListView.incrementCurrentIndex()
             return
         }
 
         if (api.keys.isPrevPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex > 0 && (themeSettings.soundsmenu)){
+            if(menuLoader.item.currentIndex == 1 && (themeSettings.soundsmenu)){
 	     	    forSound.play();
 	        }
             menuItem.menuListView.decrementCurrentIndex()
-            Logger.info("Menu Index: " + menuLoader.item.currentIndex)
+
 	    return
         }
     }
@@ -140,6 +139,7 @@ Item {
                     focus: gamesListMenuLoader.focus
                     subMenuEnable: true
                     subMenuModel: collectionsMenuModelLoader.item
+                    subMenuIndex: themeSettings.menuIndex_subMenu
                     //gamesListModel: themeData.collectionsListModel.get(collectionsMenuListView.currentIndex).games
                     gamesListModel: currentCollection.games
                     menuName: rootWindow.state
@@ -150,19 +150,6 @@ Item {
                 }
             }
 
-        }
-    }
-
-
-    Component {
-        id: favoritesMenu
-
-        GamesListMenu {
-            focus: contentLoader.focus
-            subMenuEnable: false
-            gamesListModel: api.allGames
-            filterOnlyFavorites: true
-            menuName: rootWindow.state
         }
     }
 
@@ -190,19 +177,6 @@ Item {
         }
         
     }
-
-    Component {
-        id: lastPlayedMenu
-
-        GamesListMenu {
-            focus: contentLoader.focus
-            subMenuEnable: false
-            gamesListModel: api.allGames
-            filterByDate: true
-            menuName: rootWindow.state
-        }
-    }
-
 
     states: [
         State {

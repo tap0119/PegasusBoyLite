@@ -275,6 +275,7 @@ FocusScope {
                         index = themeSettings["menuIndex_subMenu"]
                     }
                     item.moveIndex(index)
+                    
                     if(currentCollection.name == "Favorites"){
                         favFilter = true
                     }
@@ -290,22 +291,26 @@ FocusScope {
                     }
                     
                     gamesListModelLoader.active = true
+
                 }
             }
         }
+
 
         Component {
             id: collectionsMenuListView
 
             SubMenu {
                 focus: false
-
+                opacity: (viewcreated)? 1 : 0
                 model: subMenuModel
 
+                
                 textName: {
                     if (themeSettings.collectionShortNames) { return "shortName"};
-                    return "name";
-                }
+                        return "name";
+                    }
+                
 
                 Component.onDestruction: {
                     themeSettings["menuIndex_subMenu_name"] = collectionsMenuRoot.currentCollection.name; 
@@ -596,7 +601,7 @@ FocusScope {
                 y: ((parent.height - (parent.height * .3)) * ((collectionsMenuLoader.item.currentIndex + 1) /  (collectionsMenuLoader.item.listView.count)));
 
                 opacity: (themeSettings.collectionscroll && collectionsMenuLoader.item.listView.count - 1 >= themeSettings.subMenuColumns) ? 1: 0;
-                color: themeData.colorTheme[theme].light
+                color: (viewcreated) ? themeData.colorTheme[theme].light: themeData.colorTheme[theme].background
             }
             
         }
