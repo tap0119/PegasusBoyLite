@@ -70,17 +70,17 @@ Item {
             dark: "#7A6400",
         },
         "Blue": {
-            background: "#00001a",
-            primary: "#007AF5",
-            secondary: "#007AF5",
+            background: "#0d001a",
+            primary: "#317ac4",
+            secondary: "#317ac4",
             light: "#005ebd",
             dark: "#073b4c",
         },
         "Purple": {
             background: "#0b0410",
-            primary: "#9d5ed4",
-            secondary: "#7f33c1",
-            light: "#6f2da8",
+            primary: "#cc33ff",
+            secondary: "#cc33ff",
+            light: "#d250ff",
             dark: "#401a61",
         },
         "Vampire": {
