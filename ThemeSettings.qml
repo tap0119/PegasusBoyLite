@@ -53,7 +53,7 @@ Item {
     ]
 
 
-    property string theme: "White"
+    property string theme: "Black"
 
     property int settingsVersion: 1
 

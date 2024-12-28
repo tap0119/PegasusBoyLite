@@ -68,6 +68,7 @@ FocusScope {
         property var subMenuModel: []
         property int subMenuIndex: 0
 	    property int place: 0
+        property int subplace: 0
 
         required property var gamesListModel
 
@@ -97,14 +98,14 @@ FocusScope {
                     pagecreated = true
                     collectionsMenuLoader.item.listView.decrementCurrentIndex();
 
-                    if(gamesListLoader.item.currentIndex > 0 && setplace){
+                    if(gamesListLoader.item.currentIndex >= 0 && setplace){
                         place = gamesListLoader.item.currentIndex
                     }
 
-                    if(currentCollection.name == "Favorites"){
+                    if(currentCollection.name == "♥ Favorites"){
                         favFilter = true
                     }
-                    if(currentCollection.name != "Favorites"){
+                    if(currentCollection.name != "♥ Favorites"){
                         favFilter = false
                     }
 
@@ -123,7 +124,7 @@ FocusScope {
 
                     gamesListLoader.item.currentIndex = place;
 
-                    if(place > gamesListModelLoader.item.count -1) {
+                    if(place >= gamesListModelLoader.item.count -1) {
                         gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
 
                         setplace = false
@@ -155,10 +156,10 @@ FocusScope {
                         place = gamesListLoader.item.currentIndex
                     }
 
-                    if(currentCollection.name == "Favorites"){
+                    if(currentCollection.name == "♥ Favorites"){
                         favFilter = true
                     }
-                    if(currentCollection.name != "Favorites"){
+                    if(currentCollection.name != "♥ Favorites"){
                         favFilter = false
                     }
 
@@ -212,8 +213,6 @@ FocusScope {
 		}
 	    }
 
-
-            // TODO: Move to on release key event
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
 
@@ -252,6 +251,8 @@ FocusScope {
                 gamesListLoader.item.currentIndex = index;
                 return;
             }
+
+
 }
 
         Loader {
@@ -276,10 +277,10 @@ FocusScope {
                     }
                     item.moveIndex(index)
                     
-                    if(currentCollection.name == "Favorites"){
+                    if(currentCollection.name == "♥ Favorites"){
                         favFilter = true
                     }
-                    if(currentCollection.name != "Favorites"){
+                    if(currentCollection.name != "♥ Favorites"){
                         favFilter = false
                     }
 

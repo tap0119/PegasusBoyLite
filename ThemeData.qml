@@ -22,7 +22,7 @@ Item {
             }
 
             const favCollection = {
-                name: "Favorites",
+                name: "♥ Favorites",
                 shortName: "♥ Fav",
                 games: api.allGames
             }
@@ -56,24 +56,24 @@ Item {
 
     property var colorTheme: {
         "Green": {
-            background: "#1c0118",
+            background: "#181810",
             primary: "#6bd425",
             secondary: "#618b25",
             light: "#618b25",
-            dark: "#370926",
+            dark: "#181810",
         },
         "Amber": {
             background: "#141514",
-            primary: "#E0B700",
-            secondary: "#A38500",
-            light: "#A38500",
-            dark: "#7A6400",
+            primary: "#ff4100",
+            secondary: "#ffff65",
+            light: "#b32d00",
+            dark: "#671514",
         },
         "Blue": {
-            background: "#000814",
+            background: "#00001a",
             primary: "#007AF5",
             secondary: "#007AF5",
-            light: "#00478F",
+            light: "#005ebd",
             dark: "#073b4c",
         },
         "Purple": {
@@ -90,12 +90,19 @@ Item {
             light: "#7c52a0",
             dark: "#242631",
         },
-         "White": {
+         "Black": {
             background: "#000000",
             primary: "#e9ecef",
             secondary: "#e9ecef",
             light: "#6c757d",
             dark: "#000000",
+        },
+        "White": {
+            background: "#ffffff",
+            primary: "#323432",
+            secondary: "#323432",
+            light: "#323432",
+            dark: "#cbcdcb",
         },
         "Pink": {
             background: "#14010C",

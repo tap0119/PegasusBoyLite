@@ -30,15 +30,16 @@ Item {
                     "id": "theme",
                     "description": "Color theme",
                     "type": "list",
-                    "default": "White",
+                    "default": "Black",
                     "options": [
-			{ "value": "White" },
+                        { "value": "Black" },
+			            { "value": "White" },
                         { "value": "Green" },
                         { "value": "Amber" },
                         { "value": "Blue" },
                         { "value": "Purple" },
-			{ "value": "Vampire" },
-			{ "value": "Pink" },
+            			{ "value": "Vampire" },
+			            { "value": "Pink" },
                     ]
                 },
 
@@ -63,6 +64,21 @@ Item {
                     "type": "bool",
                     "default": "Disable",
                 },
+                {
+                    "name": "Last Played Range",
+                    "id": "lastPlayedDays",
+                    "description": "How many days to show games on the recent list. Select 0 to disable (may require restart)",
+                    "type": "list",
+                    "default": "30",
+                    "options": [
+                        { "value": "0" },
+			{ "value": "1" },
+                        { "value": "3" },
+                        { "value": "7" },
+                        { "value": "14" },
+ 			{ "value": "30" },
+                    ]
+                },
 
                 {
                     "name": "Primary Asset",
@@ -73,20 +89,6 @@ Item {
                     "options": [
 			{ "value": "Title Screen" },
                         { "value": "Box Art" },
-                    ]
-                },
-                {
-                    "name": "Last Played Range",
-                    "id": "lastPlayedDays",
-                    "description": "How many days to show games on the recent list. Select 0 to disable (may require restart)",
-                    "type": "list",
-                    "default": "30",
-                    "options": [
-                        { "value": "0" },
-			            { "value": "1" },
-                        { "value": "3" },
-                        { "value": "7" },
-                        { "value": "14" },
                     ]
                 },
                 {
@@ -312,8 +314,8 @@ Item {
                     "description": "The distance between scanlines",
                     "type": "range",
                     "default": "180",
-                    "min": 144,
-                    "max": 288,
+                    "min": 100,
+                    "max": 240,
                     "step": 1,
 
                 }

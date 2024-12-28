@@ -17,21 +17,36 @@ Item {
     Keys.onPressed: {
         if (api.keys.isNextPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex == 0 && (themeSettings.soundsmenu)){
-     	    forSound.play();
-	        }
+            if(menuLoader.item.currentIndex == 0){
                 menuItem.menuListView.incrementCurrentIndex()
+                if((themeSettings.soundsmenu)){
+                    forSound.play();
+                }
+     	    
+	        }else if(menuLoader.item.currentIndex >= 0){
+                menuItem.menuListView.decrementCurrentIndex()
+                if((themeSettings.soundsmenu)){
+                    forSound.play();
+                }
+            }
             return
         }
 
         if (api.keys.isPrevPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex == 1 && (themeSettings.soundsmenu)){
-	     	    forSound.play();
-	        }
-            menuItem.menuListView.decrementCurrentIndex()
-
-	    return
+            if(menuLoader.item.currentIndex == 0){
+                //menuItem.menuListView.incrementCurrentIndex()
+                //if((themeSettings.soundsmenu)){
+                //    forSound.play();
+                //}
+     	    
+	        }else if(menuLoader.item.currentIndex >= 0){
+                menuItem.menuListView.decrementCurrentIndex()
+                if((themeSettings.soundsmenu)){
+                    forSound.play();
+                }
+            }
+            return
         }
     }
 
