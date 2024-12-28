@@ -64,10 +64,10 @@ Item {
         },
         "Amber": {
             background: "#141514",
-            primary: "#ff4100",
-            secondary: "#ffff65",
-            light: "#b32d00",
-            dark: "#671514",
+            primary: "#E0B700",
+            secondary: "#A38500",
+            light: "#A38500",
+            dark: "#7A6400",
         },
         "Blue": {
             background: "#00001a",
