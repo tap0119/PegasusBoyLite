@@ -33,6 +33,8 @@ FocusScope {
     property bool favFilter: false
     property bool recentFilter: false
     property bool setplace: true
+
+    property bool keyup: true
     
 
 	SoundEffect {
@@ -194,42 +196,91 @@ FocusScope {
                 return;
             }
 
-
+            //switch images
             if (api.keys.isDetails(event)) {
                 event.accepted = true;
-		if(imagetype2){
-                	imagetype2 = false;  
-		}else{
-                	imagetype2 = true;
-		}
-	    }
+                if(keyup){
+                    if(imagetype2){
+                        imagetype2 = false;  
+                    }else{
+                        imagetype2 = true;
+                    }
+                }
+                keyup = false
+                return;
+	       }
 
+            //enlarge images
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
-		if(imagebigview2){
-                	imagebigview2 = false;
-		}else{
-                	imagebigview2 = true;
-		}
-	    }
+                if(keyup){
+                    if(imagebigview2){
+                        imagebigview2 = false;
+                    }else{
+                        imagebigview2 = true;
+                    }
+                }
+                keyup = false
+                return;
+		    }
 
+            //favorite game
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
-
-		if(themeSettings.soundsmenu){
-			favSound.play();
-		}
-		
-                gamesListModel.get(gamesListModelLoader.item.mapToSource(gamesListLoader.item.currentIndex)).favorite =
-                    !gamesListModel.get(gamesListModelLoader.item.mapToSource(gamesListLoader.item.currentIndex)).favorite   
+                if(keyup){
+                    if(themeSettings.soundsmenu){
+                        favSound.play();
+                    }
+                    gamesListModel.get(gamesListModelLoader.item.mapToSource(gamesListLoader.item.currentIndex)).favorite =
+                        !gamesListModel.get(gamesListModelLoader.item.mapToSource(gamesListLoader.item.currentIndex)).favorite  
+                    if(collectionsMenuLoader.item.listView.currentIndex == 0){
+                    gamesMediaLoader.active = false
+                    gamesMediaLoader.active = true
+                    }
+                } 
+                keyup = false
                 return;
             }
-
+	    
+            //launch game
             if (api.keys.isAccept(event)) {
                 event.accepted = true;
                 Logger.info("GamesListMenu:keys:accept:launchingGame:" + currentGame.title);
                 currentGame.launch();
                 return;
+            }
+
+
+            /////////////
+            if (api.keys.isPrevPage(event)) {
+                if(collectionsMenuLoader.item.listView.currentIndex != 0){
+                    viewcreated = false
+                    pagecreated = true
+                    favFilter = true
+                    recentFilter = false
+                    if(gamesListLoader.item.currentIndex >= 0 && setplace){
+                        place = gamesListLoader.item.currentIndex
+                    }
+                    collectionsMenuLoader.item.listView.currentIndex = 0
+
+                    gamesMediaLoader.active = false
+                    gamesMediaLoader.active = true
+                    
+                    gamesListLoader.item.currentIndex = place;
+
+                    if(place > gamesListModelLoader.item.count -1) {
+                        gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
+
+                        setplace = false
+                    }
+                
+                    viewcreated = true
+                    if(themeSettings.soundsmenu){
+                        navSound.play();
+                    }
+                }     
+	            return
+            
             }
         }
 
@@ -252,7 +303,11 @@ FocusScope {
                 return;
             }
 
-
+            //prevent autorepeat
+            if (api.keys.isCancel(event) || api.keys.isDetails(event) || api.keys.isFilters(event)){
+                keyup = true
+                return;
+            }
 }
 
         Loader {
@@ -459,7 +514,7 @@ FocusScope {
 
                onCurrentIndexChanged:{Logger.info("gamesListView:modelEpoch:" + model.get(currentIndex).lastPlayedEpoch)
 		
-	        if(viewcreated && themeSettings.soundslist){
+	        if(viewcreated && themeSettings.soundslist && keyup){
                 navSound2.play()
                 setplace = true
             }
@@ -636,7 +691,6 @@ FocusScope {
 	    y:(subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : parent.height * (themeSettings.subMenuEmptyHeight / 100)
 	    color: themeData.colorTheme[theme].background
         }
-
 
 
 
