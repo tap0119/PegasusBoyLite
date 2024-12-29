@@ -9,30 +9,44 @@ Item {
 
 	SoundEffect {
 		id: forSound;
-		source: 'assets/sound/forward.wav';
-		volume: .25;
+		source: 'assets/sound/click.wav';
+		volume: .15;
 	}
 
 
     Keys.onPressed: {
         if (api.keys.isNextPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex < 3 && themeSettings.soundsmenu){
-	    	forSound.play();
-	    }
-            menuItem.menuListView.incrementCurrentIndex()
-            Logger.info("Menu Index: " + menuLoader.item.currentIndex)
+            if(menuLoader.item.currentIndex == 0){
+                menuItem.menuListView.incrementCurrentIndex()
+                if((themeSettings.soundsmenu)){
+                    forSound.play();
+                }
+     	    
+	        }else if(menuLoader.item.currentIndex >= 0){
+                menuItem.menuListView.decrementCurrentIndex()
+                if((themeSettings.soundsmenu)){
+                    forSound.play();
+                }
+            }
             return
         }
 
         if (api.keys.isPrevPage(event)) {
             event.accepted = true
-            if(menuLoader.item.currentIndex > 0 && (themeSettings.soundsmenu)){
-	     	forSound.play();
-	    }
-            menuItem.menuListView.decrementCurrentIndex()
-            Logger.info("Menu Index: " + menuLoader.item.currentIndex)
-	    return
+            if(menuLoader.item.currentIndex == 0){
+                //menuItem.menuListView.incrementCurrentIndex()
+                //if((themeSettings.soundsmenu)){
+                //    forSound.play();
+                //}
+     	    
+	        }else if(menuLoader.item.currentIndex >= 0){
+                menuItem.menuListView.decrementCurrentIndex()
+                if((themeSettings.soundsmenu)){
+                    forSound.play();
+                }
+            }
+            return
         }
     }
 
@@ -48,7 +62,8 @@ Item {
         id: menuLoader
         focus: false
         width: parent.width
-        height: parent.height * 0.1
+        height: 0
+        //height: parent.height * 0.1
         sourceComponent: menuComponent
 	y: themeSettings.menuadjust      
 	asynchronous: true
@@ -77,7 +92,7 @@ Item {
         asynchronous: true
         anchors {
             top: menuLoader.bottom
-            bottomMargin: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? themeSettings.footerfontsize + 5 + (parent.height * 0.03) : parent.height * 0.03 
+            bottomMargin: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? themeSettings.footerfontsize + 3 + (parent.height * 0.03) : parent.height * 0.03 
             bottom: parent.bottom
             left: parent.left
             right: parent.right
@@ -139,6 +154,7 @@ Item {
                     focus: gamesListMenuLoader.focus
                     subMenuEnable: true
                     subMenuModel: collectionsMenuModelLoader.item
+                    subMenuIndex: themeSettings.menuIndex_subMenu
                     //gamesListModel: themeData.collectionsListModel.get(collectionsMenuListView.currentIndex).games
                     gamesListModel: currentCollection.games
                     menuName: rootWindow.state
@@ -149,19 +165,6 @@ Item {
                 }
             }
 
-        }
-    }
-
-
-    Component {
-        id: favoritesMenu
-
-        GamesListMenu {
-            focus: contentLoader.focus
-            subMenuEnable: false
-            gamesListModel: api.allGames
-            filterOnlyFavorites: true
-            menuName: rootWindow.state
         }
     }
 
@@ -181,27 +184,14 @@ Item {
 
             Component.onDestruction:{
                 //themeSettings.collectionAllGames != showall
-                if(themeSettings.menusize != size){
-                    menuLoader.active = !menuLoader.active
-                    menuLoader.active = !menuLoader.active
-                }
+                //if(themeSettings.menusize != size){
+                //    menuLoader.active = !menuLoader.active
+                //    menuLoader.active = !menuLoader.active
+                //}
             }
         }
         
     }
-
-    Component {
-        id: lastPlayedMenu
-
-        GamesListMenu {
-            focus: contentLoader.focus
-            subMenuEnable: false
-            gamesListModel: api.allGames
-            filterByDate: true
-            menuName: rootWindow.state
-        }
-    }
-
 
     states: [
         State {
@@ -214,29 +204,29 @@ Item {
                 }
             ]
         },
-        State {
-            name: "favorites"
-            when: menuItem.currentIndex == 1
-            changes: [
-                PropertyChanges {
-                    target: contentLoader
-                    sourceComponent: favoritesMenu
-                }
-            ]
-        },
-        State {
-            name: "lastplayed"
-            when: menuItem.currentIndex == 2
-            changes: [
-                PropertyChanges {
-                    target: contentLoader
-                    sourceComponent: lastPlayedMenu
-                }
-            ]
-        },
+        //State {
+        //    name: "favorites"
+        //    when: menuItem.currentIndex == 1
+        //    changes: [
+        //        PropertyChanges {
+        //            target: contentLoader
+        //            sourceComponent: favoritesMenu
+        //        }
+        //    ]
+        //},
+        //State {
+        //    name: "lastplayed"
+        //    when: menuItem.currentIndex == 2
+        //    changes: [
+        //        PropertyChanges {
+        //            target: contentLoader
+        //            sourceComponent: lastPlayedMenu
+        //        }
+        //    ]
+        //},
         State {
             name: "settings"
-            when: menuItem.currentIndex == 3
+            when: menuItem.currentIndex == 1
             PropertyChanges {
                 target: contentLoader
                 sourceComponent: settingsMenu

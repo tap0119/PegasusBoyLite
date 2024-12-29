@@ -30,15 +30,16 @@ Item {
                     "id": "theme",
                     "description": "Color theme",
                     "type": "list",
-                    "default": "White",
+                    "default": "Black",
                     "options": [
-			{ "value": "White" },
+                        { "value": "Black" },
+			            { "value": "White" },
                         { "value": "Green" },
                         { "value": "Amber" },
                         { "value": "Blue" },
                         { "value": "Purple" },
-			{ "value": "Vampire" },
-			{ "value": "Pink" },
+            			{ "value": "Vampire" },
+			            { "value": "Pink" },
                     ]
                 },
 
@@ -63,6 +64,21 @@ Item {
                     "type": "bool",
                     "default": "Disable",
                 },
+                {
+                    "name": "Last Played Range",
+                    "id": "lastPlayedDays",
+                    "description": "How many days to show games on the recent list. Select 0 to disable (may require restart)",
+                    "type": "list",
+                    "default": "30",
+                    "options": [
+                        { "value": "0" },
+			{ "value": "1" },
+                        { "value": "3" },
+                        { "value": "7" },
+                        { "value": "14" },
+ 			{ "value": "30" },
+                    ]
+                },
 
                 {
                     "name": "Primary Asset",
@@ -73,20 +89,6 @@ Item {
                     "options": [
 			{ "value": "Title Screen" },
                         { "value": "Box Art" },
-                    ]
-                },
-                {
-                    "name": "Last Played Range",
-                    "id": "lastPlayedDays",
-                    "description": "The max number of days to show games on the last played menu",
-                    "type": "list",
-                    "default": "30",
-                    "options": [
-			{ "value": "1" },
-                        { "value": "3" },
-                        { "value": "7" },
-                        { "value": "14" },
-                        { "value": "30" },
                     ]
                 },
                 {
@@ -135,9 +137,9 @@ Item {
             "settings": [
 
                 {
-		    "name": "Main Menu - Font Size",
+		    "name": "Sub-Menu Font Size",
                     "id": "menusize",
-                    "description": "The font size for the Main Menu (reloads Menu on leaving Settings if changed)",
+                    "description": "The font size for the Sub-Menu",
                     "type": "range",
                     "default": "16",
                     "min": 10,
@@ -146,9 +148,9 @@ Item {
                 },
 
                 {
-		    "name": "Main Menu - Height Adjust",
+		    "name": "Height Adjust",
                     "id": "menuadjust",
-                    "description": "Adjust the Main Menu to be closer to the top of the screen",
+                    "description": "Adjust the screen to be closer to the top of the screen",
                     "type": "range",
                     "default": "0",
                     "min": -25,
@@ -216,16 +218,16 @@ Item {
                     "max": 5,
                     "step": 1,
                 },
-                {
-                    "name": "Sub-Menu - Empty Height",
-                    "id": "subMenuEmptyHeight",
-                    "description": "The margin between the Main List and Menu when there is no Sub-Menu",
-                    "type": "range",
-                    "default": "6",
-                    "min": 0,
-                    "max": 12,
-                    "step": 1,
-                },
+                //{
+                //    "name": "Sub-Menu - Empty Height",
+                //    "id": "subMenuEmptyHeight",
+                //    "description": "The margin between the Main List and Menu when there is no Sub-Menu",
+                //    "type": "range",
+                //    "default": "6",
+                //    "min": 0,
+                //    "max": 12,
+                //    "step": 1,
+                //},
 
             ]
         },
@@ -312,8 +314,8 @@ Item {
                     "description": "The distance between scanlines",
                     "type": "range",
                     "default": "180",
-                    "min": 144,
-                    "max": 288,
+                    "min": 100,
+                    "max": 240,
                     "step": 1,
 
                 }

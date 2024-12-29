@@ -58,12 +58,12 @@ Item {
         opacity: (imagebigview) ? 0 : 1;
 	width: root.width / 2.1
         x: parent.width - ((root.width*.98) * .5)
-	y: parent.height - 25 + marginoffset
+	y: parent.height - 17 + marginoffset
 	font.bold: true
 	//wrapMode:Text.WordWrap
 
 	fontSizeMode: Text.HorizontalFit
- 	font.pointSize: themeSettings.footerfontsize + 5
+ 	font.pointSize: themeSettings.footerfontsize +5 
         font.family: "HackRegular"
     }
 

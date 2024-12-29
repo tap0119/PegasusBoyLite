@@ -49,6 +49,8 @@ FocusScope {
            //}
             subMenuListView.columns = (settingsview) ? 4 : col
 
+            resizeFont()
+
             Logger.debug("SubMenu:columnsChanged:" + columns);
 
         }
@@ -101,6 +103,8 @@ FocusScope {
         onWidthChanged: resizeFont()
         onCountChanged: resizeFont()
 
+
+
         Component.onCompleted: {
             // fontSize = utils.calculateFontSizeModel(subMenuListFont.font, 
             //     (subMenuListView.width / subMenuListView.columns) * 0.8,
@@ -112,14 +116,19 @@ FocusScope {
             resizeFont()
             // The position for the middle elements caused it to be at the beginning
             // This is a workaround to fix the view
+
             if (currentIndex > 0) { positionViewAtIndex(currentIndex - 1, ListView.SnapPosition) }
             else { positionViewAtIndex(currentIndex, ListView.SnapPosition) }
+
         }
 
         onCurrentIndexChanged: {
             Logger.info("SubMenu:subMenuListView:currentIndexChanged:" + currentIndex)
+
+
         }
     }
+
 
     SubMenuDelegate {
         id: subMenuDelegate

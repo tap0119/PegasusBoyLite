@@ -26,7 +26,14 @@ FocusScope {
 
     property bool imagetype2:true
     property bool imagebigview2:true
+
+    property bool pagecreated: false
     property bool viewcreated:false
+
+    property bool favFilter: false
+    property bool recentFilter: false
+    property bool setplace: true
+    
 
 	SoundEffect {
 		id: navSound;
@@ -60,7 +67,8 @@ FocusScope {
         required property bool subMenuEnable
         property var subMenuModel: []
         property int subMenuIndex: 0
-	property int place: 0
+	    property int place: 0
+        property int subplace: 0
 
         required property var gamesListModel
 
@@ -69,7 +77,7 @@ FocusScope {
 
         property var currentCollection: {
             return subMenuModel.get(collectionsMenuLoader.item.currentIndex)
-//return subMenuModel.get(subMenuModel.mapToSource(collectionsMenuLoader.item.currentIndex))
+//return subMenuModel.get(subMenuModel.mapToSource(collectionsMenuLoader.item.currentIndex));
         }
 
         property var currentGame: { 
@@ -84,25 +92,54 @@ FocusScope {
             }
 
             if (event.key == Qt.Key_Left && subMenuEnable) {
-		event.accepted = true;
+		        event.accepted = true;
                 if (collectionsMenuLoader.item.listView.currentIndex - 1 >= 0) {
-		    viewcreated = false
+		            viewcreated = false
+                    pagecreated = true
                     collectionsMenuLoader.item.listView.decrementCurrentIndex();
 
-		    if(gamesListLoader.item.currentIndex > 0){
-	 	    	place = gamesListLoader.item.currentIndex
-	 	    }
-                    gamesListLoader.item.currentIndex = place;
+                    if(gamesListLoader.item.currentIndex >= 0 && setplace){
+                        place = gamesListLoader.item.currentIndex
+                    }
+
+                    if(currentCollection.name == "♥ Favorites"){
+                        favFilter = true
+                    }
+                    if(currentCollection.name != "♥ Favorites"){
+                        favFilter = false
+                    }
+
+                    if(currentCollection.name == "Recent"){
+                        recentFilter = true
+                    }
+                    if(currentCollection.name != "Recent"){
+                        recentFilter = false
+                    }
+
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
                     gamesListLoader.active = false
                     gamesListLoader.active = true
+
+                    gamesListLoader.item.currentIndex = place;
+
+                    if(place >= gamesListModelLoader.item.count -1) {
+                        gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
+
+                        setplace = false
+                    }
+
+                    viewcreated = true
+                    
+                    
                     Logger.debug("GamesListMenu:keys:left:currentSubMenu:" + currentCollection.name)
                     if(themeSettings.soundsmenu){
                         navSound.play();
                     }
                 }	
+
+
 		
                 return;
             }
@@ -110,18 +147,44 @@ FocusScope {
             if (event.key == Qt.Key_Right && subMenuEnable) {
                 event.accepted = true;
                 if (collectionsMenuLoader.item.listView.currentIndex + 1 < collectionsMenuLoader.item.listView.count) {
-		    viewcreated = false
+                    viewcreated = false
+                    pagecreated = true
+
                     collectionsMenuLoader.item.listView.incrementCurrentIndex();
-                    
-		    if(gamesListLoader.item.currentIndex > 0){
-	 	   	 place = gamesListLoader.item.currentIndex
-		    }
-                    gamesListLoader.item.currentIndex = place;
+                        
+                    if(gamesListLoader.item.currentIndex > 0 && setplace){
+                        place = gamesListLoader.item.currentIndex
+                    }
+
+                    if(currentCollection.name == "♥ Favorites"){
+                        favFilter = true
+                    }
+                    if(currentCollection.name != "♥ Favorites"){
+                        favFilter = false
+                    }
+
+                    if(currentCollection.name == "Recent"){
+                        recentFilter = true
+                    }
+                    if(currentCollection.name != "Recent"){
+                        recentFilter = false
+                    }
+    
                     // Hacky force refresh of game media
                     gamesMediaLoader.active = false
                     gamesMediaLoader.active = true
                     gamesListLoader.active = false
                     gamesListLoader.active = true
+
+                    gamesListLoader.item.currentIndex = place;
+                    if(place > gamesListModelLoader.item.count -1) {
+                        gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
+
+                        setplace = false
+                    }
+
+                    viewcreated = true
+
                     Logger.debug("GamesListMenu:keys:right:currentSubMenu:" + currentCollection.name)
                     if(themeSettings.soundsmenu){
                         navSound.play();
@@ -135,7 +198,7 @@ FocusScope {
             if (api.keys.isDetails(event)) {
                 event.accepted = true;
 		if(imagetype2){
-                	imagetype2 = false;
+                	imagetype2 = false;  
 		}else{
                 	imagetype2 = true;
 		}
@@ -150,8 +213,6 @@ FocusScope {
 		}
 	    }
 
-
-            // TODO: Move to on release key event
             if (api.keys.isFilters(event)) {
                 event.accepted = true;
 
@@ -190,6 +251,8 @@ FocusScope {
                 gamesListLoader.item.currentIndex = index;
                 return;
             }
+
+
 }
 
         Loader {
@@ -213,25 +276,42 @@ FocusScope {
                         index = themeSettings["menuIndex_subMenu"]
                     }
                     item.moveIndex(index)
+                    
+                    if(currentCollection.name == "♥ Favorites"){
+                        favFilter = true
+                    }
+                    if(currentCollection.name != "♥ Favorites"){
+                        favFilter = false
+                    }
 
+                    if(currentCollection.name == "Recent"){
+                        recentFilter = true
+                    }
+                    if(currentCollection.name != "Recent"){
+                        recentFilter = false
+                    }
                     
                     gamesListModelLoader.active = true
+
                 }
             }
         }
+
 
         Component {
             id: collectionsMenuListView
 
             SubMenu {
                 focus: false
-
+                opacity: (viewcreated)? 1 : 0
                 model: subMenuModel
 
+                
                 textName: {
                     if (themeSettings.collectionShortNames) { return "shortName"};
-                    return "name";
-                }
+                        return "name";
+                    }
+                
 
                 Component.onDestruction: {
                     themeSettings["menuIndex_subMenu_name"] = collectionsMenuRoot.currentCollection.name; 
@@ -241,6 +321,8 @@ FocusScope {
                 Component.onCompleted: {
                     Logger.info("GamesListMenu:collectionsMenuListView:onCompleted")
                 }
+                
+                
                 
             }
         }
@@ -255,8 +337,10 @@ FocusScope {
                     Logger.info("GamesListMenu:gamesListModelLoader:LoaderReady")
                     gamesListLoader.active = true
                 }
+
             }
         }
+
 
         Component {
             id: gamesListProxyModel
@@ -266,17 +350,17 @@ FocusScope {
                 delayed: false
                 filters: [
                     ValueFilter {
-                        enabled: collectionsMenuRoot.filterOnlyFavorites
+                        enabled: (collectionsMenuRoot.filterOnlyFavorites || favFilter)
                         roleName: "favorite"
                         value: true
                     },
                     RangeFilter {
-                        enabled: collectionsMenuRoot.filterByDate
+                        enabled: (collectionsMenuRoot.filterByDate || recentFilter)
                         roleName: "playCount"
                         minimumValue: 1
                     },
                     ExpressionFilter {
-                        enabled: collectionsMenuRoot.filterByDate 
+                        enabled: (collectionsMenuRoot.filterByDate || recentFilter) 
                         expression: {
                             var dateOffset = (24 * 60 * 60 * 1000) * themeSettings.lastPlayedDays;
                             var myDate = new Date();
@@ -293,11 +377,11 @@ FocusScope {
                 ]
                 sorters: [
                     RoleSorter {
-                        enabled: !collectionsMenuRoot.filterByDate
+                        enabled: (!collectionsMenuRoot.filterByDate && !recentFilter)
                         roleName: "sortBy"
                     },
                     FilterSorter {
-                        enabled: themeSettings.gamesFavoritesOnTop
+                        enabled: themeSettings.gamesFavoritesOnTop && (!collectionsMenuRoot.filterByDate && !recentFilter)
                         priority: 1000
                         filters: [
                             ValueFilter {
@@ -307,7 +391,7 @@ FocusScope {
                         ]
                     },
                     RoleSorter {
-                        enabled: collectionsMenuRoot.filterByDate
+                        enabled: (collectionsMenuRoot.filterByDate || recentFilter)
                         roleName: "lastPlayedEpoch"
                         sortOrder: Qt.DescendingOrder
                     }
@@ -365,12 +449,20 @@ FocusScope {
                     }
                     Logger.info("GameListMenu:gameListView:onCompleted:savedIndex:" + index);
                     moveIndex(index);
-			viewcreated = true
+
+                    
+                    if(!pagecreated){
+                        viewcreated = true
+                    }
+			
                 }
 
                onCurrentIndexChanged:{Logger.info("gamesListView:modelEpoch:" + model.get(currentIndex).lastPlayedEpoch)
 		
-		if(viewcreated && themeSettings.soundslist){navSound2.play()}
+	        if(viewcreated && themeSettings.soundslist){
+                navSound2.play()
+                setplace = true
+            }
  		}
 
 
@@ -404,6 +496,7 @@ FocusScope {
     }
 
 
+
 //Clock
         Rectangle {
             width: t.width + 2.5
@@ -425,7 +518,7 @@ FocusScope {
                 opacity: (themeSettings.showClock) ? 1 : 0
                 font.family: "HackRegular"
                 font.pointSize: themeSettings.footerfontsize
-                color: themeData.colorTheme[theme].primary;
+                color: themeData.colorTheme[theme].light;
             }  
         }
 
@@ -453,7 +546,7 @@ FocusScope {
                 opacity: (themeSettings.showBattery) ? 1 : 0
                 font.family: "HackRegular"
                 font.pointSize: themeSettings.footerfontsize
-                color: themeData.colorTheme[theme].primary;
+                color: themeData.colorTheme[theme].light;
             }  
         }
 
@@ -481,23 +574,11 @@ FocusScope {
                 opacity: (themeSettings.gamesListCounter) ? 1 : 0
                 font.family: "HackRegular"
                 font.pointSize: themeSettings.footerfontsize
-                color: themeData.colorTheme[theme].primary;
+                color: themeData.colorTheme[theme].light;
             }  
         }
 
-
-	//for image big view, darken the background by 85%, do not darken the submenu
-        Rectangle {
-        id: mediabackground
-	    opacity:  (imagebigview2) ? 0 : 0.85
-        width: root.width
-	    height: root.height
-	    x: 0
-	    y:(subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : parent.height * (themeSettings.subMenuEmptyHeight / 100)
-	    color: themeData.colorTheme[theme].background
-        }
-
-	//collections scroll bar
+        	//collections scroll bar
         Rectangle {
 
             width: 8
@@ -521,10 +602,42 @@ FocusScope {
                 y: ((parent.height - (parent.height * .3)) * ((collectionsMenuLoader.item.currentIndex + 1) /  (collectionsMenuLoader.item.listView.count)));
 
                 opacity: (themeSettings.collectionscroll && collectionsMenuLoader.item.listView.count - 1 >= themeSettings.subMenuColumns) ? 1: 0;
-                color: themeData.colorTheme[theme].light
+                color: (viewcreated) ? themeData.colorTheme[theme].light: themeData.colorTheme[theme].background
             }
             
         }
+
+        Rectangle {
+            width: parent.width + 1000
+            height: 2
+            x: -100
+            y: parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) - 2
+            color: themeData.colorTheme[theme].light
+        }
+
+        Rectangle {
+            width: (parent.width * (themeSettings.itemListWidth / 100)) + 13
+           height: 2
+            x: 0
+            y: parent.height
+            color: themeData.colorTheme[theme].light
+            opacity: 0
+        //    opacity: (themeSettings.gamesListCounter || themeSettings.showClock || themeSettings.showBattery) ? 1 : 0
+        }
+
+
+	//for image big view, darken the background by 85%, do not darken the submenu
+        Rectangle {
+        id: mediabackground
+	    opacity:  (imagebigview2) ? 0 : 0.85
+        width: root.width
+	    height: root.height
+	    x: 0
+	    y:(subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : parent.height * (themeSettings.subMenuEmptyHeight / 100)
+	    color: themeData.colorTheme[theme].background
+        }
+
+
 
 
         Loader {
@@ -550,9 +663,6 @@ FocusScope {
                 imagebigview: imagebigview2;
         	}
         }
-
-
-
 
         Component.onCompleted: {
             Logger.info("GamesListMenu:collectionsMenuRoot:onComplete")

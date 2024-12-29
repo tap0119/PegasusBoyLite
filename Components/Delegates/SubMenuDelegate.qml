@@ -23,30 +23,31 @@ Item {
                 id: subMenuText
                 text: model[textName]
 
-		verticalAlignment: Text.AlignBottom; 
+		verticalAlignment: Text.AlignCenter; 
 
                 font.family: "HackRegular"
                 font.pixelSize: subMenuListView.fontSize
                 font.bold:  subMenuTextRect.ListView.isCurrentItem ? true: false
-                color: subMenuTextRect.ListView.isCurrentItem ? themeData.colorTheme[theme].primary : themeData.colorTheme[theme].secondary
+                color: subMenuTextRect.ListView.isCurrentItem ? themeData.colorTheme[theme].primary : themeData.colorTheme[theme].light
                 //color: themeData.colorTheme[theme].primary
                 font.capitalization: Font.AllUppercase
                 
-opacity: {
+opacity: 1
+		//{
 
 //default 1, opacity of options further than 1 away, then opacity of options exactly 1 away from selected option
-                    if (Math.abs(subMenuTextRect.ListView.view.currentIndex - index) > 1) {
-                        return 0.5;
-                    }
-                    if (Math.abs(subMenuTextRect.ListView.view.currentIndex - index) === 1) {
-                        return 0.5;
-                    }
-                    return 1.5;
-                }
+                    //if (Math.abs(subMenuTextRect.ListView.view.currentIndex - index) > 1) {
+                    //    return 0.5;
+                    //}
+                    //if (Math.abs(subMenuTextRect.ListView.view.currentIndex - index) === 1) {
+                    //    return 0.5;
+                    //}
+                    //return 1.5;
+                    //}
 
                 anchors {
                     // bottom: parent.bottom
-                    // horizontalCenter: parent.horizontalCenter
+                    //horizontalCenter: parent.horizontalCenter
                     centerIn: parent
                 }
 

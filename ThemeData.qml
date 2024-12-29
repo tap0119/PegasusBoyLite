@@ -8,6 +8,8 @@ Item {
     // Add an All to the main collections model
     // Dynamically create a ListModel to keep compatability
     property alias collectionsListModel: collectionsListModel
+
+    
     ListModel {
         id: collectionsListModel 
 
@@ -15,10 +17,28 @@ Item {
             const collections = api.collections
             const allCollection = {
                 name: "All",
-                shortName: "all",
+                shortName: "All",
                 games: api.allGames
             }
-		
+
+            const favCollection = {
+                name: "♥ Favorites",
+                shortName: "♥ Fav",
+                games: api.allGames
+            }
+
+            const recentCollection = {
+                name: "Recent",
+                shortName: "Recent",
+                games: api.allGames
+            }
+
+            collectionsListModel.append(favCollection)
+
+            if(themeSettings.lastPlayedDays > 0) {
+                collectionsListModel.append(recentCollection)
+            }
+
             if (themeSettings.collectionAllGames) {
                 collectionsListModel.append(allCollection)
             }
@@ -36,11 +56,11 @@ Item {
 
     property var colorTheme: {
         "Green": {
-            background: "#1c0118",
+            background: "#181810",
             primary: "#6bd425",
             secondary: "#618b25",
             light: "#618b25",
-            dark: "#370926",
+            dark: "#181810",
         },
         "Amber": {
             background: "#141514",
@@ -50,17 +70,17 @@ Item {
             dark: "#7A6400",
         },
         "Blue": {
-            background: "#000814",
-            primary: "#007AF5",
-            secondary: "#007AF5",
-            light: "#00478F",
+            background: "#0d001a",
+            primary: "#317ac4",
+            secondary: "#317ac4",
+            light: "#005ebd",
             dark: "#073b4c",
         },
         "Purple": {
             background: "#0b0410",
-            primary: "#9d5ed4",
-            secondary: "#7f33c1",
-            light: "#6f2da8",
+            primary: "#cc33ff",
+            secondary: "#cc33ff",
+            light: "#d250ff",
             dark: "#401a61",
         },
         "Vampire": {
@@ -70,12 +90,19 @@ Item {
             light: "#7c52a0",
             dark: "#242631",
         },
-         "White": {
+         "Black": {
             background: "#000000",
             primary: "#e9ecef",
             secondary: "#e9ecef",
             light: "#6c757d",
             dark: "#000000",
+        },
+        "White": {
+            background: "#ffffff",
+            primary: "#323432",
+            secondary: "#323432",
+            light: "#323432",
+            dark: "#cbcdcb",
         },
         "Pink": {
             background: "#14010C",
