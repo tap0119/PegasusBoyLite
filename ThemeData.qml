@@ -70,11 +70,11 @@ Item {
             dark: "#7A6400",
         },
         "Blue": {
-            background: "#0d001a",
-            primary: "#317ac4",
-            secondary: "#317ac4",
-            light: "#005ebd",
-            dark: "#073b4c",
+            background: "#03071e",
+            primary: "#d0dde2",
+            secondary: "#d0dde2",
+            light: "#b8bcc1",
+            dark: "#03071e",
         },
         "Purple": {
             background: "#0b0410",
@@ -104,13 +104,13 @@ Item {
             light: "#323432",
             dark: "#cbcdcb",
         },
-        "Pink": {
-            background: "#14010C",
-            primary: "#CC125A",
-            secondary: "#CC125A",
-            light: "#EB1E6D",
-            dark: "#280118",
-        }
+        "Gray": {
+            background: "#2b2b2b",
+            primary: "#bfbfbf",
+            secondary: "#bfbfbf",
+            light: "#a6a6a6",
+            dark: "#2b2b2b",
+        },
     }
 
     property var languageNames: {

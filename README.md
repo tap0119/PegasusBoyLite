@@ -27,7 +27,8 @@ For information on assets see [Assets in the Pegasus Docs](https://pegasus-front
 
 ## Controls
 - Dpad              - Navigate
-- L1/R1             - Move Menu tabs
+- R1                - Navigate to Settings and back
+- L1                - On games list, jump to favorites. On Settings, go back to games list
 - L2/R2             - Move up or down 10 rows in the Main List
 
 - (A) Accept        - Launch Game

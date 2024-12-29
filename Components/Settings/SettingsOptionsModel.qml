@@ -32,14 +32,14 @@ Item {
                     "type": "list",
                     "default": "Black",
                     "options": [
+                        { "value": "White" },
+                        { "value": "Gray" },
                         { "value": "Black" },
-			            { "value": "White" },
                         { "value": "Green" },
                         { "value": "Amber" },
                         { "value": "Blue" },
                         { "value": "Purple" },
             			{ "value": "Vampire" },
-			            { "value": "Pink" },
                     ]
                 },
 
