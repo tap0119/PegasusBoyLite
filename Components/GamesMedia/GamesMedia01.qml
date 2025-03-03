@@ -30,7 +30,7 @@ Item {
         //    height: height
         //}
 
-        source: currentGame.assets.screenshot || ""
+        source: (imagetype) ? currentGame.assets.screenshot || currentGame.assets.background : currentGame.assets.background || currentGame.assets.screenshot
     }
 
 
@@ -47,7 +47,7 @@ Item {
         //    width: width
         //    height: height
         //}
-       		 source: (imagetype) ? primary || secondary: secondary|| ""
+       		 source: (imagetype) ? primary || secondary: secondary|| primary
     }
 
 
