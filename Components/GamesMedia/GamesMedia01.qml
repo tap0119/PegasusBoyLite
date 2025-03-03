@@ -22,7 +22,7 @@ Item {
         width: (singleimageview == 2) ? root.width: parent.width/1.05;
         height: (singleimageview == 2) ? root.height: (parent.height +marginoffset)/2;
         x:(singleimageview == 2) ? parent.width - (root.width): 0;
-        y:(singleimageview == 2) ? -(root.height - marginoffset - parent.height - 14): parent.height/2 + 5 + (marginoffset/2);
+        y:(singleimageview == 2) ? -(root.height - marginoffset - parent.height - 12): parent.height/2 + 5 + (marginoffset/2);
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
@@ -43,7 +43,7 @@ Item {
         width: (singleimageview == 1) ? root.width: parent.width/1.05;
         height: (singleimageview == 1) ? root.height: (parent.height +marginoffset)/2;
         x:(singleimageview == 1) ? parent.width - (root.width): 0;
-        y:(singleimageview == 1) ? -(root.height - marginoffset - parent.height - 14): 0
+        y:(singleimageview == 1) ? -(root.height - marginoffset - parent.height - 12): 0
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
@@ -58,20 +58,22 @@ Item {
 
 
 
-    Text {
-        text: (themeSettings.replacePar) ? currentGame.title.replace(/\(([^()]+)\)/g,""): currentGame.title
-    color: themeData.colorTheme[theme].primary;
-        opacity: 0;
-	width: root.width / 2.1
-        x: parent.width - ((root.width*.98) * .5)
-	y: parent.height - 17 + marginoffset
-	font.bold: true
+    //Text {
+    //    text: (themeSettings.replacePar) ? currentGame.title.replace(/\(([^()]+)\)/g,""): currentGame.title
+    //color: themeData.colorTheme[theme].primary;
+    //    opacity:  (singleimageview == 0) ? 0: 1;
+	//width: root.width / 2.1
+    //    x: parent.width - ((root.width*.98))
+	//y: parent.height - 17 + marginoffset
+	//font.bold: true
+
+    //style: Text.Outline; styleColor: "black" 
 	//wrapMode:Text.WordWrap
 
-	fontSizeMode: Text.HorizontalFit
- 	font.pointSize: themeSettings.footerfontsize +5 
-        font.family: "HackRegular"
-    }
+	//fontSizeMode: Text.HorizontalFit
+ 	//font.pointSize: themeSettings.footerfontsize +5 
+    //    font.family: "HackRegular"
+    //}
 
 
 

@@ -523,6 +523,9 @@ FocusScope {
 		
 	        if(viewcreated && themeSettings.soundslist && keyup){
                 navSound2.play()
+            }
+
+	        if(viewcreated && keyup){
                 setplace = true
             }
  		}
@@ -659,7 +662,7 @@ FocusScope {
             Rectangle {
 
                 width: 8
-                height: parent.height * .3
+                height: Math.round(parent.height * .3)
 
                 y: ((parent.height - (parent.height * .3)) * ((collectionsMenuLoader.item.currentIndex + 1) /  (collectionsMenuLoader.item.listView.count)));
 
@@ -691,11 +694,12 @@ FocusScope {
 	//for image big view, darken the background by 85%, do not darken the submenu
         Rectangle {
         id: mediabackground
-	    opacity:  (imagebigview2) ? 0 : 0.85
+	    opacity:  (singleimageview2 == 0) ? 0 : 0.85
         width: root.width
 	    height: root.height
 	    x: 0
-	    y:(subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : parent.height * (themeSettings.subMenuEmptyHeight / 100)
+	    //y:(subMenuEnable) ? parent.height * (themeSettings.subMenuHeight / 100) + (parent.height * (themeSettings.subMenuMargin / 100)) : parent.height * (themeSettings.subMenuEmptyHeight / 100)
+        y:0
 	    color: themeData.colorTheme[theme].background
         }
 
