@@ -26,6 +26,7 @@ FocusScope {
 
     property bool imagetype2:true
     property bool imagebigview2:true
+    property int singleimageview2: 0
 
     property bool pagecreated: false
     property bool viewcreated:false
@@ -213,16 +214,20 @@ FocusScope {
             //enlarge images
             if (api.keys.isCancel(event)) {
                 event.accepted = true;
-                if(keyup){
-                    if(imagebigview2){
-                        imagebigview2 = false;
-                    }else{
-                        imagebigview2 = true;
+                 if(keyup){
+                    if(singleimageview2 == 0){
+                        singleimageview2 = 1;
+                    }else if(singleimageview2 == 1){
+                        singleimageview2 = 2;
+                    }else if(singleimageview2 == 2){
+                        singleimageview2 = 0;
                     }
                 }
                 keyup = false
                 return;
 		    }
+
+            
 
             //favorite game
             if (api.keys.isFilters(event)) {
@@ -253,6 +258,7 @@ FocusScope {
 
             /////////////
             if (api.keys.isPrevPage(event)) {
+                event.accepted = true;
                 if(collectionsMenuLoader.item.listView.currentIndex != 0){
                     viewcreated = false
                     pagecreated = true
@@ -270,6 +276,7 @@ FocusScope {
 
                     if(place > gamesListModelLoader.item.count -1) {
                         gamesListLoader.item.currentIndex = gamesListModelLoader.item.count -1
+                event.accepted = true;
 
                         setplace = false
                     }
@@ -278,7 +285,7 @@ FocusScope {
                     if(themeSettings.soundsmenu){
                         navSound.play();
                     }
-                }     
+                }    
 	            return
             
             }
@@ -713,8 +720,9 @@ FocusScope {
             id: gamesMedia
             GamesMedia01 {
           	currentGame: gamesListLoader.item.model.get(gamesListLoader.item.currentIndex); 
-		imagetype: imagetype2;
+		        imagetype: imagetype2;
                 imagebigview: imagebigview2;
+                singleimageview: singleimageview2;
         	}
         }
 
