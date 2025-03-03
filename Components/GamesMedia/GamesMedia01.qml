@@ -22,7 +22,7 @@ Item {
         width: (singleimageview == 2) ? root.width: parent.width/1.05;
         height: (singleimageview == 2) ? root.height: (parent.height +marginoffset)/2;
         x:(singleimageview == 2) ? parent.width - (root.width): 0;
-        y:(singleimageview == 2) ? -(root.height - marginoffset - parent.height - 15): parent.height/2 + 5 + (marginoffset/2);
+        y:(singleimageview == 2) ? -(root.height - marginoffset - parent.height - 14): parent.height/2 + 5 + (marginoffset/2);
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
@@ -31,13 +31,10 @@ Item {
         //    height: height
         //}
 
-<<<<<<< Updated upstream
-        source: currentGame.assets.screenshot || ""
-=======
         source: (imagetype) ? currentGame.assets.screenshot || currentGame.assets.background : currentGame.assets.background || currentGame.assets.screenshot
 
         opacity: (singleimageview == 1) ? 0: 1;
->>>>>>> Stashed changes
+
     }
 
 
@@ -46,7 +43,7 @@ Item {
         width: (singleimageview == 1) ? root.width: parent.width/1.05;
         height: (singleimageview == 1) ? root.height: (parent.height +marginoffset)/2;
         x:(singleimageview == 1) ? parent.width - (root.width): 0;
-        y:(singleimageview == 1) ? -(root.height - marginoffset - parent.height - 15): 0
+        y:(singleimageview == 1) ? -(root.height - marginoffset - parent.height - 14): 0
 
         asynchronous: true
         fillMode: Image.PreserveAspectFit
@@ -54,14 +51,9 @@ Item {
         //    width: width
         //    height: height
         //}
-<<<<<<< Updated upstream
-       		 source: (imagetype) ? primary || secondary: secondary|| ""
-=======
-       		 source: (imagetype) ? primary || secondary: secondary|| primary
+       	 source: (imagetype) ? primary || secondary: secondary|| primary
 
              opacity: (singleimageview == 2) ? 0: 1;
-
->>>>>>> Stashed changes
     }
 
 
