@@ -516,6 +516,8 @@ FocusScope {
 		
 	        if(viewcreated && themeSettings.soundslist && keyup){
                 navSound2.play()
+            }
+            if(viewcreated && keyup){
                 setplace = true
             }
  		}
