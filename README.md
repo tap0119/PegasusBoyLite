@@ -10,6 +10,7 @@ This theme is designed to use the following assets. To get the most out of this 
 - Titlescreen
 - Boxfront
 - Screenshot
+- Background
 
 For information on assets see [Assets in the Pegasus Docs](https://pegasus-frontend.org/docs/user-guide/meta-assets/)
 
@@ -33,7 +34,7 @@ For information on assets see [Assets in the Pegasus Docs](https://pegasus-front
 
 - (A) Accept        - Launch Game
 - (B) Back          - Enlarge images
-- (X) Game Details  - Switch between the Title screen and Box Art image 
+- (X) Game Details  - Switch between images shown
 - (Y) Filter        - Favorite game
 
 ## Screenshots
@@ -53,5 +54,6 @@ Distributed under the GNU General Public License v3.0+. See [COPYING](COPYING) f
   License: [CC BY 4.0](assets/retroarch-assets/COPYING)
 - [Hack font](https://github.com/source-foundry/Hack)
   License: [MIT License](assets/fonts/Hack/LICENSE.md)
+
 
 
