@@ -40,7 +40,6 @@ For information on assets see [Assets in the Pegasus Docs](https://pegasus-front
 ![1|150](./assets/screenshots/1.png)
 ![2|150](./assets/screenshots/2.png)
 ![3|150](./assets/screenshots/3.png)
-![4|150](./assets/screenshots/4.png)
 ![5|150](./assets/screenshots/5.png)
 
 ## License
@@ -54,4 +53,5 @@ Distributed under the GNU General Public License v3.0+. See [COPYING](COPYING) f
   License: [CC BY 4.0](assets/retroarch-assets/COPYING)
 - [Hack font](https://github.com/source-foundry/Hack)
   License: [MIT License](assets/fonts/Hack/LICENSE.md)
+
 
